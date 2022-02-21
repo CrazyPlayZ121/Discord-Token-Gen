@@ -65,6 +65,7 @@ class Botter:
             user = requests.get("https://apis.kahoot.it/namerator")
             user = user.text
             user = json.loads(user)
+            user = str(user['name'])
         self.emailSession = emailApi.email(self.emailKey)
         self.email = self.emailSession.email
         print(f"{Style.BRIGHT}{Fore.GREEN}[+] Got email : {self.email}!")
