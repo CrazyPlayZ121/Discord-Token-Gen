@@ -15,15 +15,15 @@ proxies = open('proxies.txt').read().split('\n')
 def generatePassword():
     return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(12))
 
-def generateDOB():
-    year = str(random.randint(1997,2001))
-    month = str(random.randint(1, 12))
-    day = str(random.randint(1,28))
-    if len(month) == 1:
-        month = '0' + month
-    if len(day) == 1:
-        day = '0' + day
-    return year + '-' + month + '-' + day
+#def generateDOB():
+#    year = str(random.randint(1997,2001))
+#    month = str(random.randint(1, 12))
+#    day = str(random.randint(1,28))
+#    if len(month) == 1:
+#        month = '0' + month
+#    if len(day) == 1:
+#        day = '0' + day
+#    return year + '-' + month + '-' + day
 
 
 class Botter:
@@ -77,7 +77,7 @@ class Botter:
                 "captcha_key":  self.getCap("4c672d35-0701-42b2-88c3-78380b0db560", "https://discord.com/"),
                 'consent': True,
 
-                'password': generatePassword(),
+                'password': username,
                 'date_of_birth': generateDOB(),
                 'email': self.email,
             }
