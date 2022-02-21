@@ -64,7 +64,7 @@ class Botter:
         else:
             username = requests.get("https://apis.kahoot.it/namerator")
             username = user.text
-            username = json.loads(user)
+            username = json.loads(username)
             username = username['name']
         self.emailSession = emailApi.email(self.emailKey)
         self.email = self.emailSession.email
