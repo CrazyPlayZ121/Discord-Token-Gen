@@ -15,15 +15,15 @@ proxies = open('proxies.txt').read().split('\n')
 def generatePassword():
     return ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(12))
 
-#def generateDOB():
-#    year = str(random.randint(1997,2001))
-#    month = str(random.randint(1, 12))
-#    day = str(random.randint(1,28))
-#    if len(month) == 1:
-#        month = '0' + month
-#    if len(day) == 1:
-#        day = '0' + day
-#    return year + '-' + month + '-' + day
+def generateDOB():
+    year = str(random.randint(1997,2001))
+    month = str(random.randint(1, 12))
+    day = str(random.randint(1,28))
+    if len(month) == 1:
+        month = '0' + month
+    if len(day) == 1:
+        day = '0' + day
+    return year + '-' + month + '-' + day
 
 
 class Botter:
@@ -58,14 +58,13 @@ class Botter:
                         print(f"{Fore.GREEN}{Style.BRIGHT}[>] Got Captcha {solvedCaptcha[0:60]}{Style.RESET_ALL}")
                         return solvedCaptcha
     def generateToken(self):
-        username = int(input("Do You want [1]Custom Username [2]Random Usernames: "))
-        if username == 1:
-            username = str(input("Enter the Username: "))
+        user = int(input("Do You want [1]Custom Username [2]Random Usernames: "))
+        if user == 1:
+            user = str(input("Enter the Username: "))
         else:
-            username = requests.get("https://apis.kahoot.it/namerator")
-            username = username.text
-            username = json.loads(username)
-            username = username['name']
+            user = requests.get("https://apis.kahoot.it/namerator")
+            user = user.text
+            user = json.loads(user)
         self.emailSession = emailApi.email(self.emailKey)
         self.email = self.emailSession.email
         print(f"{Style.BRIGHT}{Fore.GREEN}[+] Got email : {self.email}!")
@@ -78,7 +77,7 @@ class Botter:
                 "captcha_key":  self.getCap("4c672d35-0701-42b2-88c3-78380b0db560", "https://discord.com/"),
                 'consent': True,
 
-                'password': username,
+                'password': generatePassword(),
                 'date_of_birth': generateDOB(),
                 'email': self.email,
             }
